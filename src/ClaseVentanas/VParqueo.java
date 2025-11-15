@@ -27,6 +27,7 @@ public class VParqueo extends javax.swing.JFrame {
     public VParqueo() {
         initComponents();
         generarMapaPorArea();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
     public void generarMapaPorArea() {
 
@@ -81,10 +82,13 @@ public class VParqueo extends javax.swing.JFrame {
 
                 // COLOR
                 if (status.equalsIgnoreCase("FREE")) {
-                lbl.setBackground(new Color(0, 200, 0)); // Verde más bonito
-             } else {
-                  lbl.setBackground(new Color(200, 0, 0)); // Rojo
+                lbl.setBackground(new Color(0, 200, 0)); // Verde
+               }else if (status.equalsIgnoreCase("OCCUPIED")) {
+                lbl.setBackground(new Color(200, 0, 0)); // Rojo
+               }else if (status.equalsIgnoreCase("TEMPORAL")) {
+               lbl.setBackground(new Color(255, 215, 0)); // Amarillo dorado
                }
+
 
                 // Tooltip con información
                 lbl.setToolTipText(
@@ -132,7 +136,7 @@ public class VParqueo extends javax.swing.JFrame {
         );
         panelMapaGeneralLayout.setVerticalGroup(
             panelMapaGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 419, Short.MAX_VALUE)
+            .addGap(0, 478, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

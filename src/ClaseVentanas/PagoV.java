@@ -4,6 +4,10 @@
  */
 package ClaseVentanas;
 
+import SubClases.SubTicket;
+import claseprin.prueba;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Slad
@@ -11,14 +15,24 @@ package ClaseVentanas;
 public class PagoV extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PagoV.class.getName());
-
+    public String placaRecibida;
+    public String totalRecibido;
+    public String modoRecibido;
     /**
      * Creates new form PagoV
      */
-    public PagoV() {
-        initComponents();
+    
+    public PagoV(String placa, String total, String modoSeleccionado) {
+        initComponents();  
+    this.placaRecibida = placa;
+    this.totalRecibido = total;
+    this.modoRecibido = modoSeleccionado;
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +57,11 @@ public class PagoV extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Continuar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,6 +111,25 @@ public class PagoV extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    String metodo = jComboBox1.getSelectedItem().toString();
+        double monto = Double.parseDouble(totalRecibido);
+
+        SubTicket sub = new SubTicket();
+
+        if (sub.crearTicket(placaRecibida, modoRecibido, monto)) {
+            JOptionPane.showMessageDialog(this, "Ticket creado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al crear ticket.");
+        }
+
+        this.dispose();
+        prueba pru = new prueba();
+        pru.setVisible(true);
+
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -114,7 +152,7 @@ public class PagoV extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PagoV().setVisible(true));
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

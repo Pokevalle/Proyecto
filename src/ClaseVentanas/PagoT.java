@@ -4,6 +4,10 @@
  */
 package ClaseVentanas;
 
+import SubClases.SubTicket;
+import claseprin.prueba;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Slad
@@ -11,12 +15,21 @@ package ClaseVentanas;
 public class PagoT extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PagoT.class.getName());
-
+    public String placaRecibida;
+    public String totalRecibido;
+    public String modoRecibido;
     /**
      * Creates new form PagoT
      */
-    public PagoT() {
-        initComponents();
+    
+    public PagoT(String placa, String total, String modoSeleccionado) {
+         initComponents();      // ✔ importante
+    this.placaRecibida = placa;
+    this.totalRecibido = total;
+    this.modoRecibido = modoSeleccionado;
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**
@@ -30,24 +43,29 @@ public class PagoT extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        combopago = new javax.swing.JComboBox<>();
+        aceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Tipo de Pago:");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "TARJETA", "SALDO" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        combopago.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        combopago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EFECTIVO", "TARJETA", "SALDO" }));
+        combopago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                combopagoActionPerformed(evt);
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Continuar");
+        aceptar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        aceptar.setText("Continuar");
+        aceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -60,9 +78,9 @@ public class PagoT extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(combopago, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton1)))
+                        .addComponent(aceptar)))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,8 +90,8 @@ public class PagoT extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(combopago, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(aceptar))
                 .addContainerGap(136, Short.MAX_VALUE))
         );
 
@@ -97,9 +115,28 @@ public class PagoT extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void combopagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combopagoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_combopagoActionPerformed
+
+    private void aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarActionPerformed
+       String metodo = combopago.getSelectedItem().toString();
+
+    double monto = Double.parseDouble(totalRecibido);
+    String modo = modoRecibido;// o CATEDRATICO, según tu lógica
+
+    SubTicket sub = new SubTicket();
+
+    if (sub.crearTicket(placaRecibida, modo, monto)) {
+        JOptionPane.showMessageDialog(this, "Ticket creado correctamente.");
+    } else {
+        JOptionPane.showMessageDialog(this, "Error al crear ticket.");
+    }
+
+    this.dispose();
+    prueba pru = new prueba();
+        pru.setVisible(true);
+    }//GEN-LAST:event_aceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,12 +160,12 @@ public class PagoT extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PagoT().setVisible(true));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton aceptar;
+    private javax.swing.JComboBox<String> combopago;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

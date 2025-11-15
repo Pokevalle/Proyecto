@@ -23,7 +23,54 @@ import javax.swing.table.DefaultTableModel;
  * @author Slad
  */
 public class SubSpots {
-    //porcentaje :D
+    
+    public void generarSpotsAutomaticos(String areaId, String tipoVehiculo, int capacidad) {
+
+    String sqlCheck = "SELECT COUNT(*) FROM spots WHERE spot_id = ?";
+    String sqlInsert = "INSERT INTO spots (spot_id, area_id, tipo_vehiculo, status) VALUES (?, ?, ?, ?)";
+
+    try (Connection con = dbConnection.conectar()) {
+
+        PreparedStatement psCheck = con.prepareStatement(sqlCheck);
+        PreparedStatement psInsert = con.prepareStatement(sqlInsert);
+
+        int creados = 0;
+
+        for (int i = 1; i <= capacidad; i++) {
+
+            String spotId = areaId + "-" + String.format("%03d", i);
+
+            // Verificar si ya existe
+            psCheck.setString(1, spotId);
+            ResultSet rs = psCheck.executeQuery();
+            rs.next();
+
+            if (rs.getInt(1) > 0) {
+                continue; // Ya existe → NO insertar
+            }
+
+            // 🔥 INSERTAR EL SPOT COMPLETO AQUÍ 🔥
+            psInsert.setString(1, spotId);
+            psInsert.setString(2, areaId);
+            psInsert.setString(3, tipoVehiculo);
+            psInsert.setString(4, "FREE");
+            psInsert.addBatch();
+
+            creados++;
+        }
+
+        psInsert.executeBatch();
+
+        if (creados > 0)
+            System.out.println("✔ " + creados + " spots nuevos generados para área " + areaId);
+        else
+            System.out.println("✔ No se generaron spots, ya existían todos.");
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    //porcentaje del espacio:D
     public double getPorcentaje(String areaNombre, String tipoVehiculo) {
 
     double ocupados = 0;

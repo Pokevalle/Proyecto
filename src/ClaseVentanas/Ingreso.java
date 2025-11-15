@@ -5,6 +5,9 @@
 package ClaseVentanas;
 
 import SubClases.SubTicket;
+import claseprin.prueba;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -97,8 +100,6 @@ public class Ingreso extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         placas = new javax.swing.JTextField();
         Buscar = new javax.swing.JButton();
-        Larea = new javax.swing.JLabel();
-        TxtArea = new javax.swing.JTextField();
         next = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -110,8 +111,6 @@ public class Ingreso extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        Lfech = new javax.swing.JLabel();
-        calendario = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,10 +128,6 @@ public class Ingreso extends javax.swing.JFrame {
                 BuscarActionPerformed(evt);
             }
         });
-
-        Larea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Larea.setForeground(new java.awt.Color(255, 255, 255));
-        Larea.setText("Area:");
 
         next.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         next.setForeground(new java.awt.Color(0, 0, 0));
@@ -177,7 +172,7 @@ public class Ingreso extends javax.swing.JFrame {
                 .addComponent(Lmodo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addComponent(LTime)
                 .addGap(18, 18, 18)
                 .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -210,13 +205,11 @@ public class Ingreso extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 102, 102));
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Regresar");
-
-        Lfech.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        Lfech.setForeground(new java.awt.Color(0, 0, 0));
-        Lfech.setText("Fecha:");
-
-        calendario.setBackground(new java.awt.Color(204, 255, 204));
-        calendario.setForeground(new java.awt.Color(0, 0, 0));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -227,11 +220,7 @@ public class Ingreso extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(126, 126, 126)
                 .addComponent(jLabel2)
-                .addGap(63, 63, 63)
-                .addComponent(Lfech)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,10 +228,7 @@ public class Ingreso extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jLabel2)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(calendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Lfech)))
+                    .addComponent(jLabel2))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -251,12 +237,6 @@ public class Ingreso extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Larea)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TxtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,16 +256,12 @@ public class Ingreso extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Larea)
-                    .addComponent(TxtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(placas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 85, Short.MAX_VALUE)
+                .addGap(9, 89, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101)
                 .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -323,8 +299,51 @@ public class Ingreso extends javax.swing.JFrame {
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
+   String placa = placas.getText().trim();
+
+    if (placa.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Debe ingresar la placa primero.");
+        return;
+    }
+
+    // VALIDAR TICKET ACTIVO
+    SubTicket sub = new SubTicket();
+    if (sub.tieneTicketActivo(placa)) {
+        JOptionPane.showMessageDialog(this,
+            "Este vehículo ya tiene un ticket activo.\nDebe procesar la salida antes de generar otro.",
+            "Ticket Activo",
+            JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+
+    // Obtener entidad
+    String entidad = sub.obtenerEntidadPorPlaca(placa);
+
+    if (entidad == null) {
+        JOptionPane.showMessageDialog(this, "Error inesperado al obtener la entidad.");
+        return;
+    }
+
+    entidad = entidad.toUpperCase();
+
+    // Obtener modo
+    String modoSeleccionado = CM.getSelectedItem().toString();
+
+    if (entidad.equals("VISITANTE")) {
+        new PagoV(placa, Cantidad.getText(), modoSeleccionado).setVisible(true);
+    } else {
+        new PagoT(placa, Cantidad.getText(), modoSeleccionado).setVisible(true);
+    }
+
+    this.dispose();
+// cerrar ingreso
     }//GEN-LAST:event_nextActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        prueba pru = new prueba();
+        pru.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,12 +375,8 @@ public class Ingreso extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CM;
     private javax.swing.JTextField Cantidad;
     private javax.swing.JLabel LTime;
-    private javax.swing.JLabel Larea;
-    private javax.swing.JLabel Lfech;
     private javax.swing.JLabel Lmodo;
     private javax.swing.JTextField Time;
-    private javax.swing.JTextField TxtArea;
-    private com.toedter.calendar.JDateChooser calendario;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

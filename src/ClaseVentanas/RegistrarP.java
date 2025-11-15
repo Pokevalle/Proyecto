@@ -19,9 +19,17 @@ public class RegistrarP extends javax.swing.JFrame {
      * Creates new form RegistrarP
      */
     public RegistrarP() {
-         initComponents();
+          initComponents(); // OBLIGATORIO
 
-    // 🔹 Control inicial (por si el combo ya tiene "VISITANTE" seleccionado)
+    // Convertir placa a mayúsculas
+    placat.addKeyListener(new java.awt.event.KeyAdapter() {
+        @Override
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            placat.setText(placat.getText().toUpperCase());
+        }
+    });
+
+    // Tipo inicial
     String tipoInicial = tipper.getSelectedItem().toString();
     if (tipoInicial.equals("VISITANTE")) {
         Cuen.setVisible(false);
@@ -33,46 +41,21 @@ public class RegistrarP extends javax.swing.JFrame {
         carnet.setText("");
     }
 
-    // 🔹 Detectar cuando el usuario cambia el tipo de persona
+    // Evento al cambiar tipo
     tipper.addActionListener(e -> {
         String tipo = tipper.getSelectedItem().toString();
         if (tipo.equals("VISITANTE")) {
-            // Oculta cuenta y pone "VISITANTE-" en carnet
             Cuen.setVisible(false);
             jLabel9.setVisible(false);
             carnet.setText("VISITANTE-");
         } else {
-            // Muestra cuenta y limpia carnet
             Cuen.setVisible(true);
             jLabel9.setVisible(true);
             carnet.setText("");
         }
     });
 
-    // 🔹 Cambia automáticamente a mayúsculas lo que se escriba en la placa
-    placa.addKeyListener(new java.awt.event.KeyAdapter() {
-        @Override
-        public void keyReleased(java.awt.event.KeyEvent evt) {
-            String texto = placa.getText();
-            placa.setText(texto.toUpperCase());
-        }
-    });
-
-    // 🔹 Cierra solo esta ventana sin detener la aplicación
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    }
-    public RegistrarP(String placas) {
-    initComponents();
-    placa.setText(placas);
-    
-    
-}
-    public void tipperActionPerformed(java.awt.event.ActionEvent evt) {                                       
-    if (tipper.getSelectedItem().toString().equalsIgnoreCase("VISITANTE")) {
-        carnet.setText("VISITANTE-");
-    } else {
-        carnet.setText("");
-    }
 }
 
     /**
@@ -87,7 +70,7 @@ public class RegistrarP extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        placa = new javax.swing.JTextField();
+        placat = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         tipvehiculo = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -144,6 +127,11 @@ public class RegistrarP extends javax.swing.JFrame {
         jLabel8.setText("Entidad");
 
         tipper.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CATEDRATICO", "ESTUDIANTE", "VISITANTE" }));
+        tipper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipperActionPerformed(evt);
+            }
+        });
 
         ok.setText("Aceptar");
         ok.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +152,7 @@ public class RegistrarP extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(placa)
+                        .addComponent(placat)
                         .addGap(42, 42, 42)
                         .addComponent(tipvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43))
@@ -217,7 +205,7 @@ public class RegistrarP extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(placa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(placat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tipvehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
@@ -292,7 +280,7 @@ public class RegistrarP extends javax.swing.JFrame {
     }
 
     SubPersona persona = new SubPersona(
-        placa.getText().trim(),
+        placat.getText().trim(),
         carnet.getText().trim(),
         nombres.getText().trim(),
         apellidos.getText().trim(),
@@ -306,6 +294,10 @@ public class RegistrarP extends javax.swing.JFrame {
     this.dispose();
         
     }//GEN-LAST:event_okActionPerformed
+
+    private void tipperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipperActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tipperActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,7 +340,7 @@ public class RegistrarP extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombres;
     private javax.swing.JButton ok;
-    private javax.swing.JTextField placa;
+    private javax.swing.JTextField placat;
     private javax.swing.JTextField telefono;
     private javax.swing.JComboBox<String> tipper;
     private javax.swing.JComboBox<String> tipvehiculo;

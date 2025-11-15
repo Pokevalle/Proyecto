@@ -4,10 +4,15 @@
  */
 package SubClases;
 
+import java.sql.Timestamp;
 /**
  *
  * @author Slad
  */
-public class SubHistorico {
-    
+public class Ticket {
+    public int id;
+    public String modo;
+    public Timestamp ingreso;
+    public Timestamp salidaTemporal;
+    public double monto;
 }
